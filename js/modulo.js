@@ -6,10 +6,7 @@
 // 403: "Forbidden"
 // 404: "Page not found"
 // For a complete list go to the Http Messages Reference
-function insertRow(parameters) {
-    var strDocument = parameters.strDocument;
-    var strFullname = parameters.strFullname;
-    var nScore = parameters.nScore;
+function insertRow(strDocument, strFullname, nScore) {
     var image = document.createElement("img");
 
     image.src = (nScore > 1600) ? "images/happy.png" : "images/unhappy.png";
@@ -33,15 +30,7 @@ function listener () {
     var data = JSON.parse(this.responseText);
 
     for(var i = 0; i < data.length; i++) {
-        insertRow({
-            parameters: {
-                parameters: {
-                    strDocument: data[i].document,
-                    strFullname: data[i].fullname,
-                    nScore: data[i].score
-                }
-            }
-        });
+        insertRow(data[i].document, data[i].fullname, data[i].score);
     }
 }
 
